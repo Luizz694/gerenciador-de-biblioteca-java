@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
+import java.awt.event.ActionListener;
 
 public class TelaPrincipal extends JFrame{
     private JTable tabelaLivros;
@@ -53,4 +54,10 @@ public class TelaPrincipal extends JFrame{
             });
         }
     }
+
+    public void addAdicionarListener(ActionListener listener) {
+        botaoAdicionar.addActionListener(listener);
+    }
+
+
 }
