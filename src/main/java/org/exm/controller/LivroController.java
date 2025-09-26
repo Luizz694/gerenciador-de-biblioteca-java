@@ -25,6 +25,7 @@ public class LivroController {
 
     public void start(){
         view.addAdicionarListener(e -> adicionarLivros());
+        view.addExcluirListener(e -> deletarLivro());
         carregarLivrosTabela();
     }
 
@@ -49,4 +50,20 @@ public class LivroController {
         }
     }
 
+    public void deletarLivro(){
+        int idLivroSelect = view.getLivroIdSelect();
+
+        if (idLivroSelect == -1){
+            JOptionPane.showMessageDialog(view, "Por favor, selecione um livro para excluir.", "Nenhum livro selecionado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirmation = JOptionPane.showConfirmDialog(view, "Tem certeza que deseja excluir este livro?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+
+        if (confirmation == JOptionPane.YES_OPTION){
+            model.DeletarLivro(idLivroSelect);
+            carregarLivrosTabela();
+            JOptionPane.showMessageDialog(view, "Livro excluído com sucesso!");
+        }
+    }
 }

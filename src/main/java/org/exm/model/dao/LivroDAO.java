@@ -27,10 +27,6 @@ public class LivroDAO {
         }
     }
 
-    /**
-     * Retorna uma lista com todos os livros do banco de dados.
-     * @return Uma lista de objetos Livro.
-     */
     public List<Livro> ListarLivros() {
         String sql = "SELECT * FROM livros";
 
@@ -58,6 +54,21 @@ public class LivroDAO {
         }
 
         return livros;
+    }
+
+    public void DeletarLivro(int id){
+        String sql = "DELETE FROM Livros WHERE id_Livro = ?";
+
+        try (Connection conn = ConexaoFactory.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao excluir livro: " + e.getMessage(), e);
+        }
     }
 }
 

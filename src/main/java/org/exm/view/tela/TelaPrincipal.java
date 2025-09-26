@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class TelaPrincipal extends JFrame{
     private JTable tabelaLivros;
     private JButton botaoAdicionar, botaoEditar, botaoExcluir;
-    private JScrollPane scrollPane; // Painel de rolagem para a tabela
+    private JScrollPane scrollPane; // rolagem para a tabela
     private JPanel painelBotoes;
 
     private DefaultTableModel modeloTabela;
@@ -28,7 +28,6 @@ public class TelaPrincipal extends JFrame{
         tabelaLivros = new JTable(modeloTabela);
         scrollPane = new JScrollPane(tabelaLivros);
 
-        //Botões
         botaoAdicionar = new JButton("Adicionar");
         botaoEditar = new JButton("Editar");
         botaoExcluir = new JButton("Excluir");
@@ -59,5 +58,15 @@ public class TelaPrincipal extends JFrame{
         botaoAdicionar.addActionListener(listener);
     }
 
+    public int getLivroIdSelect(){
+        int linha = tabelaLivros.getSelectedRow();
+        if (linha == -1) {
+            return -1;
+        };
+        return (int)modeloTabela.getValueAt(linha, 0);
+    }
 
+    public void addExcluirListener(ActionListener listener) {
+        botaoExcluir.addActionListener(listener);
+    }
 }
