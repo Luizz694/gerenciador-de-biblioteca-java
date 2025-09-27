@@ -1,5 +1,7 @@
 package org.exm.view.tela;
 
+import org.exm.model.entity.Livro;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -76,5 +78,12 @@ public class TelaCadastroLivro extends JDialog {
 
     public boolean isConfirmar(){
         return confirmar;
+    }
+
+    public void setDadosEditLivro(Livro livro){
+        Titulo.setText(livro.getTitulo());
+        Autor.setText(livro.getAutor());
+        DataPublicacao.setText(String.valueOf(livro.getDataPublicacao()));
+        Livre.setSelected(livro.getLivre());
     }
 }
