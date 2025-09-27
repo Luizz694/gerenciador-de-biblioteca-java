@@ -69,4 +69,8 @@ public class TelaPrincipal extends JFrame{
     public void addExcluirListener(ActionListener listener) {
         botaoExcluir.addActionListener(listener);
     }
+
+    public void addEditarListener(ActionListener listener){
+        botaoEditar.addActionListener(listener);
+    }
 }

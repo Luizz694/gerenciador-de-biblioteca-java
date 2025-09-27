@@ -26,6 +26,7 @@ public class LivroController {
     public void start(){
         view.addAdicionarListener(e -> adicionarLivros());
         view.addExcluirListener(e -> deletarLivro());
+        view.addEditarListener(e -> editarLivro());
         carregarLivrosTabela();
     }
 
@@ -65,5 +66,36 @@ public class LivroController {
             carregarLivrosTabela();
             JOptionPane.showMessageDialog(view, "Livro excluído com sucesso!");
         }
+    }
+
+    public void editarLivro(){
+        int idLivroSelect = view.getLivroIdSelect();
+
+        if (idLivroSelect == -1){
+            JOptionPane.showMessageDialog(view, "Por favor, selecione um livro para excluir.", "Nenhum livro selecionado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Livro livroPraEditar = model.BuscarPorId(idLivroSelect);
+        TelaCadastroLivro telaEdicao = new TelaCadastroLivro(view);
+        telaEdicao.setTitle("Editar Livro");
+
+        telaEdicao.setDadosEditLivro(livroPraEditar);
+        telaEdicao.setVisible(true);
+        if (telaEdicao.isConfirmar()){
+            String novoTitulo = telaEdicao.getTitulo();
+            String novoAutor = telaEdicao.getAutor();
+            int novoAno = telaEdicao.getDataPublicacao();
+            boolean novoLivre = telaEdicao.isLivre();
+
+            livroPraEditar.setTitulo(novoTitulo);
+            livroPraEditar.setAutor(novoAutor);
+            livroPraEditar.setDataPublicacao(novoAno);
+            livroPraEditar.setLivre(novoLivre);
+
+            model.EditarLivro(livroPraEditar);
+            carregarLivrosTabela();
+        }
+
     }
 }
